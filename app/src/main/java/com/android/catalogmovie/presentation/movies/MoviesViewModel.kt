@@ -5,7 +5,7 @@ import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.android.catalogmovie.base.BaseViewModel
 import com.android.catalogmovie.data.MovieRepository
-import com.android.catalogmovie.data.remote.model.Movie
+import com.android.catalogmovie.domain.entities.Movie
 
 class MoviesViewModel : BaseViewModel() {
     private val repo = MovieRepository()

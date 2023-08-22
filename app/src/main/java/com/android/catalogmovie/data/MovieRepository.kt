@@ -12,6 +12,8 @@ import com.android.catalogmovie.data.remote.NetworkState
 import com.android.catalogmovie.data.remote.ProcessState
 import com.android.catalogmovie.data.remote.model.*
 import com.android.catalogmovie.data.remote.stateNetworkCall
+import com.android.catalogmovie.domain.entities.Movie
+import com.android.catalogmovie.domain.entities.Review
 
 class MovieRepository : BaseRepository() {
 
@@ -49,7 +51,7 @@ class MovieRepository : BaseRepository() {
         }
     }
 
-    fun getReviews(movieId: Int): LiveData<PagingData<ReviewsResponse.Review>> {
+    fun getReviews(movieId: Int): LiveData<PagingData<Review>> {
         return Pager(
             config = PagingConfig(
                 pageSize = 25,

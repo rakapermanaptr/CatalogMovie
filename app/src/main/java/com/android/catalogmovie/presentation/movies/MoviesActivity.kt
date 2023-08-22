@@ -6,8 +6,8 @@ import androidx.lifecycle.lifecycleScope
 import androidx.paging.LoadState
 import androidx.paging.PagingData
 import androidx.recyclerview.widget.GridLayoutManager
-import com.android.catalogmovie.data.remote.model.Movie
 import com.android.catalogmovie.databinding.ActivityMoviesBinding
+import com.android.catalogmovie.domain.entities.Movie
 import com.android.catalogmovie.utils.NavigationUtils
 import com.android.catalogmovie.utils.gone
 import com.android.catalogmovie.utils.show

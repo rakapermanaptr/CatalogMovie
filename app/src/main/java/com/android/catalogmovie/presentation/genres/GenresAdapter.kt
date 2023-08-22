@@ -3,15 +3,15 @@ package com.android.catalogmovie.presentation.genres
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.android.catalogmovie.data.remote.model.Genres
+import com.android.catalogmovie.domain.entities.Genre
 import com.android.catalogmovie.databinding.ItemGenreBinding
 
-class GenresAdapter(private val onItemClick: (item: Genres.Genre) -> Unit) :
+class GenresAdapter(private val onItemClick: (item: Genre) -> Unit) :
     RecyclerView.Adapter<GenresAdapter.ViewHolder>() {
 
-    private val itemList = mutableListOf<Genres.Genre>()
+    private val itemList = mutableListOf<Genre>()
 
-    fun addItems(itemList: List<Genres.Genre>) {
+    fun addItems(itemList: List<Genre>) {
         this.itemList.clear()
         this.itemList.addAll(itemList)
         notifyDataSetChanged()
@@ -34,7 +34,7 @@ class GenresAdapter(private val onItemClick: (item: Genres.Genre) -> Unit) :
     inner class ViewHolder(private val binding: ItemGenreBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(data: Genres.Genre) {
+        fun bind(data: Genre) {
             with(binding) {
                 tvGenre.text = data.name
             }

@@ -4,7 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.GridLayoutManager
 import com.android.catalogmovie.data.remote.RequestState
-import com.android.catalogmovie.data.remote.model.Genres
+import com.android.catalogmovie.domain.entities.Genre
 import com.android.catalogmovie.databinding.ActivityGenresBinding
 import com.android.catalogmovie.utils.NavigationUtils
 import com.android.catalogmovie.utils.gone
@@ -34,7 +34,7 @@ class GenresActivity : AppCompatActivity() {
                 RequestState.Loading -> progressBar.show()
                 is RequestState.Success -> {
                     progressBar.gone()
-                    showGenresList(state.result.genres ?: emptyList())
+                    showGenresList(state.result)
                 }
                 is RequestState.Failed -> {
                     progressBar.gone()
@@ -44,7 +44,7 @@ class GenresActivity : AppCompatActivity() {
         }
     }
 
-    private fun showGenresList(genreList: List<Genres.Genre>) {
+    private fun showGenresList(genreList: List<Genre>) {
         with(binding) {
             genreAdapter.addItems(genreList)
             rvGenres.apply {

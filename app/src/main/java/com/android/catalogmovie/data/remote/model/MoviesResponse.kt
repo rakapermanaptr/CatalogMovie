@@ -5,14 +5,14 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class MovieResponse(
+data class MoviesResponse(
     @SerialName("page")
     val page: Int,
     @SerialName("results")
-    val results: List<Movie>
+    val results: List<MovieResponse>
 )
 @Serializable
-data class Movie(
+data class MovieResponse(
     @SerialName("adult")
     val adult: Boolean? = null,
     @SerialName("backdrop_path")
@@ -20,7 +20,7 @@ data class Movie(
     @SerialName("genre_ids")
     val genreIds: List<Int>? = null,
     @SerialName("id")
-    val id: Int? = null,
+    val id: Int,
     @SerialName("original_language")
     val originalLanguage: String? = null,
     @SerialName("original_title")
@@ -34,7 +34,7 @@ data class Movie(
     @SerialName("release_date")
     val releaseDate: String? = null,
     @SerialName("title")
-    val title: String? = null,
+    val title: String,
     @SerialName("video")
     val video: Boolean? = null,
     @SerialName("vote_average")

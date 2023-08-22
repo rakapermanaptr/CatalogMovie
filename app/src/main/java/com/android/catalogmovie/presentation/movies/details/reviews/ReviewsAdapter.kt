@@ -5,11 +5,11 @@ import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.android.catalogmovie.data.remote.model.ReviewsResponse
 import com.android.catalogmovie.databinding.ItemReviewBinding
+import com.android.catalogmovie.domain.entities.Review
 
 class ReviewListPagingAdapter :
-    PagingDataAdapter<ReviewsResponse.Review, ReviewListPagingAdapter.ViewHolder>(ReviewComparator) {
+    PagingDataAdapter<Review, ReviewListPagingAdapter.ViewHolder>(ReviewComparator) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -22,27 +22,22 @@ class ReviewListPagingAdapter :
         holder.bind(review)
     }
 
-    class ViewHolder(private val binding: ItemReviewBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(data: ReviewsResponse.Review) {
+    class ViewHolder(private val binding: ItemReviewBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        fun bind(data: Review) {
             with(binding) {
-                tvReview.text = data.content
-                tvAuthor.text = "Author: ${data.author}"
+                tvReview.text = data.review
+                tvAuthor.text = data.author
             }
         }
     }
 
-    object ReviewComparator : DiffUtil.ItemCallback<ReviewsResponse.Review>() {
-        override fun areItemsTheSame(
-            oldItem: ReviewsResponse.Review,
-            newItem: ReviewsResponse.Review
-        ): Boolean {
+    object ReviewComparator : DiffUtil.ItemCallback<Review>() {
+        override fun areItemsTheSame(oldItem: Review, newItem: Review): Boolean {
             return oldItem.id == newItem.id
         }
 
-        override fun areContentsTheSame(
-            oldItem: ReviewsResponse.Review,
-            newItem: ReviewsResponse.Review
-        ): Boolean {
+        override fun areContentsTheSame(oldItem: Review, newItem: Review): Boolean {
             return oldItem == newItem
         }
     }

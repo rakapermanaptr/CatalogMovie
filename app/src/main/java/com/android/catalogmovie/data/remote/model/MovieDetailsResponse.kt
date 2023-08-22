@@ -19,13 +19,13 @@ data class MovieDetailsResponse(
     @SerialName("homepage")
     val homepage: String? = null,
     @SerialName("id")
-    val id: Int? = null,
+    val id: Int,
     @SerialName("imdb_id")
     val imdbId: String? = null,
     @SerialName("original_language")
     val originalLanguage: String? = null,
     @SerialName("original_title")
-    val originalTitle: String? = null,
+    val originalTitle: String,
     @SerialName("overview")
     val overview: String? = null,
     @SerialName("popularity")

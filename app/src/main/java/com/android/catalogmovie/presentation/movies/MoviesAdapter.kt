@@ -5,9 +5,8 @@ import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.android.catalogmovie.BuildConfig
-import com.android.catalogmovie.data.remote.model.Movie
 import com.android.catalogmovie.databinding.ItemMovieBinding
+import com.android.catalogmovie.domain.entities.Movie
 import com.bumptech.glide.Glide
 
 class MovieListPagingAdapter(private val onItemClick: (item: Movie) -> Unit) :
@@ -29,9 +28,9 @@ class MovieListPagingAdapter(private val onItemClick: (item: Movie) -> Unit) :
         fun bind(data: Movie) {
             with(binding) {
                 Glide.with(binding.root)
-                    .load("${BuildConfig.BASE_URL_IMAGE}${data.posterPath}")
+                    .load(data.imageUrl)
                     .into(imgPoster)
-                tvTitle.text = data.originalTitle
+                tvTitle.text = data.title
             }
         }
     }

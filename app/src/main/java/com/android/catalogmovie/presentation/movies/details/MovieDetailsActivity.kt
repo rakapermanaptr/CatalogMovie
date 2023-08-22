@@ -3,14 +3,12 @@ package com.android.catalogmovie.presentation.movies.details
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
-import com.android.catalogmovie.BuildConfig
 import com.android.catalogmovie.R
 import com.android.catalogmovie.data.remote.RequestState
-import com.android.catalogmovie.data.remote.model.MovieDetailsResponse
 import com.android.catalogmovie.databinding.ActivityMovieDetailsBinding
+import com.android.catalogmovie.domain.entities.MovieDetail
 import com.android.catalogmovie.utils.gone
 import com.android.catalogmovie.utils.handleErrorState
-import com.android.catalogmovie.utils.round
 import com.android.catalogmovie.utils.show
 import com.bumptech.glide.Glide
 import com.google.android.material.tabs.TabLayoutMediator
@@ -49,14 +47,14 @@ class MovieDetailsActivity : AppCompatActivity() {
         setupViewPager(movieId)
     }
 
-    private fun showMovieDetail(movie: MovieDetailsResponse) {
+    private fun showMovieDetail(movie: MovieDetail) {
         with(binding) {
-            toolbar.title = movie.originalTitle
+            toolbar.title = movie.title
             Glide.with(binding.root)
-                .load("${BuildConfig.BASE_URL_IMAGE}${movie.backdropPath}")
+                .load(movie.imageUrl)
                 .into(imgBackdrop)
-            tvName.text = movie.originalTitle
-            tvRating.text = "Rating: ${movie.voteAverage?.round()}"
+            tvName.text = movie.title
+            tvRating.text = movie.rating
         }
     }
 

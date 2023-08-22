@@ -9,12 +9,11 @@ import com.android.catalogmovie.presentation.movies.details.videos.VideosFragmen
 
 class PagerAdapter(activity: FragmentActivity, private val movieId: Int) : FragmentStateAdapter(activity) {
 
-
     override fun getItemCount(): Int  = 2
 
     override fun createFragment(position: Int): Fragment {
         val arg = Bundle()
-        arg.putInt("KEY_ID", movieId)
+        arg.putInt(KEY_ID, movieId)
         return if (position == 0) {
             val reviewsFragment = ReviewsFragment().apply {
                 arguments = arg
@@ -26,5 +25,9 @@ class PagerAdapter(activity: FragmentActivity, private val movieId: Int) : Fragm
             }
             videosFragment
         }
+    }
+
+    companion object {
+        const val KEY_ID = "KEY_ID"
     }
 }

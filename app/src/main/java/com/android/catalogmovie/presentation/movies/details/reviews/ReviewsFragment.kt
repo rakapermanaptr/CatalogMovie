@@ -11,9 +11,10 @@ import androidx.paging.PagingData
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.android.catalogmovie.data.remote.model.ReviewsResponse
 import com.android.catalogmovie.databinding.FragmentReviewBinding
+import com.android.catalogmovie.domain.entities.Review
 import com.android.catalogmovie.presentation.movies.details.MovieDetailsViewModel
+import com.android.catalogmovie.presentation.movies.details.PagerAdapter
 import com.android.catalogmovie.utils.gone
 import com.android.catalogmovie.utils.show
 import com.android.catalogmovie.utils.showToast
@@ -30,7 +31,7 @@ class ReviewsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val movieId = arguments?.getInt("KEY_ID") ?: 0
+        val movieId = arguments?.getInt(PagerAdapter.KEY_ID) ?: 0
         lifecycleScope.launch {
             vm.getReviews(movieId).observe(requireActivity()) {
                 showReviews(it)
@@ -38,7 +39,7 @@ class ReviewsFragment : Fragment() {
         }
     }
 
-    private fun showReviews(reviewList: PagingData<ReviewsResponse.Review>) {
+    private fun showReviews(reviewList: PagingData<Review>) {
         with(binding) {
             reviewsAdapter.submitData(lifecycle, reviewList)
             rvReviews.apply {

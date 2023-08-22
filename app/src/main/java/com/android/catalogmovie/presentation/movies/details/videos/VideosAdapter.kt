@@ -3,14 +3,14 @@ package com.android.catalogmovie.presentation.movies.details.videos
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.android.catalogmovie.data.remote.model.VideosResponse
 import com.android.catalogmovie.databinding.ItemVideoBinding
+import com.android.catalogmovie.domain.entities.Video
 
 class VideosAdapter : RecyclerView.Adapter<VideosAdapter.ViewHolder>() {
 
-    private val itemList = mutableListOf<VideosResponse.Video>()
+    private val itemList = mutableListOf<Video>()
 
-    fun addItems(itemList: List<VideosResponse.Video>) {
+    fun addItems(itemList: List<Video>) {
         this.itemList.clear()
         this.itemList.addAll(itemList)
         notifyDataSetChanged()
@@ -31,9 +31,9 @@ class VideosAdapter : RecyclerView.Adapter<VideosAdapter.ViewHolder>() {
 
     inner class ViewHolder(private val binding: ItemVideoBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(data: VideosResponse.Video) {
+        fun bind(data: Video) {
             with(binding) {
-                wvVideo.loadUrl(data.getVideoUrl())
+                wvVideo.loadUrl(data.url)
                 wvVideo.settings.javaScriptEnabled = true
             }
         }

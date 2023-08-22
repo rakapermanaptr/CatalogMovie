@@ -28,7 +28,7 @@ data class ReviewsResponse(
         @SerialName("created_at")
         val createdAt: String? = null,
         @SerialName("id")
-        val id: String? = null,
+        val id: String,
         @SerialName("updated_at")
         val updatedAt: String? = null,
         @SerialName("url")

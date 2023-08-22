@@ -8,9 +8,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.android.catalogmovie.data.remote.RequestState
-import com.android.catalogmovie.data.remote.model.VideosResponse
 import com.android.catalogmovie.databinding.FragmentVideosBinding
+import com.android.catalogmovie.domain.entities.Video
 import com.android.catalogmovie.presentation.movies.details.MovieDetailsViewModel
+import com.android.catalogmovie.presentation.movies.details.PagerAdapter
 import com.android.catalogmovie.utils.gone
 import com.android.catalogmovie.utils.handleErrorState
 import com.android.catalogmovie.utils.show
@@ -24,7 +25,7 @@ class VideosFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         with(binding) {
-            val movieId = arguments?.getInt("KEY_ID") ?: 0
+            val movieId = arguments?.getInt(PagerAdapter.KEY_ID) ?: 0
             vm.getVideos(movieId) { state ->
                 when (state) {
                     RequestState.Loading -> progressBar.show()
@@ -41,7 +42,7 @@ class VideosFragment : Fragment() {
         }
     }
 
-    private fun showVideos(videoList: List<VideosResponse.Video>) {
+    private fun showVideos(videoList: List<Video>) {
         with(binding) {
             val videosAdapter = VideosAdapter()
             videosAdapter.addItems(videoList)

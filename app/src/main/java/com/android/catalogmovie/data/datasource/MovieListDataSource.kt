@@ -3,7 +3,9 @@ package com.android.catalogmovie.data.datasource
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.android.catalogmovie.data.remote.ApiService
-import com.android.catalogmovie.data.remote.model.Movie
+import com.android.catalogmovie.data.remote.model.MovieResponse
+import com.android.catalogmovie.domain.entities.Movie
+import com.android.catalogmovie.utils.toMovie
 
 class MoviesListDatasource(
     private val genreId: Int,
@@ -23,7 +25,7 @@ class MoviesListDatasource(
             val response =
                 network.getDiscoveryMovies(genreId = genreId, page = position, perPage = 25)
             LoadResult.Page(
-                data = response.body()!!.results,
+                data = response.body()!!.results.map { it.toMovie() },
                 prevKey = if (position == 1) null else position - 1,
                 nextKey = position + 1
             )
