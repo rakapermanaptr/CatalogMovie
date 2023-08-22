@@ -13,4 +13,5 @@ sealed class NetworkState<out T> {
         object ByTimeout : Failed()
         object NoConnection : Failed()
     }
+    object Loading : NetworkState<Nothing>()
 }

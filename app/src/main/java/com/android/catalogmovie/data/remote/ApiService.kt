@@ -15,6 +15,8 @@ interface ApiService {
     @GET("discover/movie")
     suspend fun getDiscoveryMovies(
         @Query("with_genres") genreId: Int,
+        @Query("page") page: Int? = 1,
+        @Query("perPage") perPage: Int? = 25,
     ): Response<BaseResponse<List<Movie>>>
 
 }

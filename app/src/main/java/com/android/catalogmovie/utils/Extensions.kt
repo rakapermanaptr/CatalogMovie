@@ -1,5 +1,7 @@
 package com.android.catalogmovie.utils
 
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import com.android.catalogmovie.data.remote.model.ErrorResponse
 import com.android.catalogmovie.di.jsonConfiguration
 import org.json.JSONObject
