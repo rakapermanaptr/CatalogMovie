@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.android.catalogmovie.data.remote.RequestState
 import com.android.catalogmovie.data.remote.model.Genres
 import com.android.catalogmovie.databinding.ActivityGenresBinding
+import com.android.catalogmovie.utils.NavigationUtils
 import com.android.catalogmovie.utils.gone
 import com.android.catalogmovie.utils.handleErrorState
 import com.android.catalogmovie.utils.show
@@ -13,7 +14,9 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class GenresActivity : AppCompatActivity() {
 
-    private val genreAdapter = GenresAdapter {}
+    private val genreAdapter = GenresAdapter {
+        NavigationUtils.navigateToMovies(this, it.id)
+    }
 
     private val vm: GenresViewModel by viewModel()
 
