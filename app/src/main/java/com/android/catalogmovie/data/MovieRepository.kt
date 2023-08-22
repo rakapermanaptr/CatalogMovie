@@ -10,10 +10,7 @@ import com.android.catalogmovie.data.datasource.MoviesListDatasource
 import com.android.catalogmovie.data.datasource.ReviewListDatasource
 import com.android.catalogmovie.data.remote.NetworkState
 import com.android.catalogmovie.data.remote.ProcessState
-import com.android.catalogmovie.data.remote.model.Genres
-import com.android.catalogmovie.data.remote.model.Movie
-import com.android.catalogmovie.data.remote.model.MovieDetailsResponse
-import com.android.catalogmovie.data.remote.model.ReviewsResponse
+import com.android.catalogmovie.data.remote.model.*
 import com.android.catalogmovie.data.remote.stateNetworkCall
 
 class MovieRepository : BaseRepository() {
@@ -64,6 +61,16 @@ class MovieRepository : BaseRepository() {
             }
             , initialKey = 1
         ).liveData
+    }
+
+    suspend fun getVideos(movieId: Int): ProcessState<VideosResponse> {
+        val response =
+            stateNetworkCall { network.getVideos(movieId) }
+        return if (response is NetworkState.Success) {
+            ProcessState.Success(response.result)
+        } else {
+            ProcessState.Failed(response as NetworkState.Failed)
+        }
     }
 
 }
