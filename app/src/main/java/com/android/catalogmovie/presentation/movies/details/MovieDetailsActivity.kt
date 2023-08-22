@@ -3,9 +3,16 @@ package com.android.catalogmovie.presentation.movies.details
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import com.android.catalogmovie.BuildConfig
 import com.android.catalogmovie.R
 import com.android.catalogmovie.data.remote.RequestState
+import com.android.catalogmovie.data.remote.model.MovieDetailsResponse
 import com.android.catalogmovie.databinding.ActivityMovieDetailsBinding
+import com.android.catalogmovie.utils.gone
+import com.android.catalogmovie.utils.handleErrorState
+import com.android.catalogmovie.utils.round
+import com.android.catalogmovie.utils.show
+import com.bumptech.glide.Glide
 import com.google.android.material.tabs.TabLayoutMediator
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -17,17 +24,22 @@ class MovieDetailsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+        with(binding) {
+            val movieId = intent.getIntExtra(KEY_MOVIE_ID, 0)
+            initView(movieId = movieId)
 
-
-        val movieId = intent.getIntExtra(KEY_MOVIE_ID, 0)
-        initView(movieId = movieId)
-
-        println("movieId: $movieId")
-        vm.getMovieDetails(movieId) { state ->
-            when (state) {
-                is RequestState.Failed -> println("Failed")
-                RequestState.Loading -> println("Loading")
-                is RequestState.Success -> println("Success, data: ${state.result}")
+            vm.getMovieDetails(movieId) { state ->
+                when (state) {
+                    RequestState.Loading -> progressBar.show()
+                    is RequestState.Success -> {
+                        progressBar.gone()
+                        showMovieDetail(state.result)
+                    }
+                    is RequestState.Failed -> {
+                        progressBar.show()
+                        handleErrorState(state.error)
+                    }
+                }
             }
         }
     }
@@ -35,6 +47,17 @@ class MovieDetailsActivity : AppCompatActivity() {
     private fun initView(movieId: Int) {
         setupToolbar()
         setupViewPager(movieId)
+    }
+
+    private fun showMovieDetail(movie: MovieDetailsResponse) {
+        with(binding) {
+            toolbar.title = movie.originalTitle
+            Glide.with(binding.root)
+                .load("${BuildConfig.BASE_URL_IMAGE}${movie.backdropPath}")
+                .into(imgBackdrop)
+            tvName.text = movie.originalTitle
+            tvRating.text = "Rating: ${movie.voteAverage?.round()}"
+        }
     }
 
     private fun setupViewPager(movieId: Int) {
@@ -49,7 +72,6 @@ class MovieDetailsActivity : AppCompatActivity() {
 
     private fun setupToolbar() {
         with(binding) {
-            toolbar.title = "Test"
             toolbar.setTitleTextColor(getColor(R.color.white))
             setSupportActionBar(toolbar)
             supportActionBar?.setDisplayHomeAsUpEnabled(true)

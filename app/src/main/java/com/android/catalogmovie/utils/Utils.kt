@@ -15,3 +15,7 @@ fun View.gone() {
 fun Context.showToast(message: String) {
     Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
 }
+
+fun Double.round(): Double {
+    return (this * 10).toInt() / 10.0
+}
