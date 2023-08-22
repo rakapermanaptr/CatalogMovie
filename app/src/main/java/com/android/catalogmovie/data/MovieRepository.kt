@@ -6,10 +6,8 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.liveData
 import com.android.catalogmovie.base.BaseRepository
-import com.android.catalogmovie.base.BaseResponse
 import com.android.catalogmovie.data.remote.NetworkState
 import com.android.catalogmovie.data.remote.ProcessState
-import com.android.catalogmovie.data.remote.RequestState
 import com.android.catalogmovie.data.remote.model.Genres
 import com.android.catalogmovie.data.remote.model.Movie
 import com.android.catalogmovie.data.remote.stateNetworkCall
@@ -26,7 +24,7 @@ class MovieRepository : BaseRepository() {
         }
     }
 
-    fun getAllMovies(genreId: Int): LiveData<PagingData<Movie>> {
+    fun getMoviesByGenre(genreId: Int): LiveData<PagingData<Movie>> {
         return Pager(
             config = PagingConfig(
                 pageSize = 25,

@@ -10,8 +10,8 @@ import com.android.catalogmovie.data.remote.model.Movie
 class MoviesViewModel : BaseViewModel() {
     private val repo = MovieRepository()
 
-    fun getMovieList(genreId: Int): LiveData<PagingData<Movie>> {
-        return repo.getAllMovies(genreId).cachedIn(viewModelScope)
+    fun getMoviesByGenre(genreId: Int): LiveData<PagingData<Movie>> {
+        return repo.getMoviesByGenre(genreId).cachedIn(viewModelScope)
     }
 
 }

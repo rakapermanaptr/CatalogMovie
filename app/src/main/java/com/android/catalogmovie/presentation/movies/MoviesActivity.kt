@@ -30,7 +30,7 @@ class MoviesActivity : AppCompatActivity() {
 
         val genreId = intent.getIntExtra(KEY_GENRE_ID, 0)
         lifecycleScope.launch {
-            vm.getMovieList(genreId).observe(this@MoviesActivity) {
+            vm.getMoviesByGenre(genreId).observe(this@MoviesActivity) {
                 showMovies(it)
             }
         }
