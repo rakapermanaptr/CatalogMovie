@@ -17,11 +17,7 @@ class MovieDetailsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        binding.toolbar.title = "Test"
-        binding.toolbar.setTitleTextColor(getColor(R.color.white))
-        setSupportActionBar(binding.toolbar)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.setDisplayShowHomeEnabled(true)
+        initView()
 
         val movieId = intent.getIntExtra(KEY_MOVIE_ID, 0)
         println("movieId: $movieId")
@@ -31,6 +27,20 @@ class MovieDetailsActivity : AppCompatActivity() {
                 RequestState.Loading -> println("Loading")
                 is RequestState.Success -> println("Success, data: ${state.result}")
             }
+        }
+    }
+
+    private fun initView() {
+        setupToolbar()
+    }
+
+    private fun setupToolbar() {
+        with(binding) {
+            toolbar.title = "Test"
+            toolbar.setTitleTextColor(getColor(R.color.white))
+            setSupportActionBar(toolbar)
+            supportActionBar?.setDisplayHomeAsUpEnabled(true)
+            supportActionBar?.setDisplayShowHomeEnabled(true)
         }
     }
 
