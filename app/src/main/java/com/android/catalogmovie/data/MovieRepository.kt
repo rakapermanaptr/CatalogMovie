@@ -6,11 +6,14 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.liveData
 import com.android.catalogmovie.base.BaseRepository
+import com.android.catalogmovie.data.datasource.MoviesListDatasource
+import com.android.catalogmovie.data.datasource.ReviewListDatasource
 import com.android.catalogmovie.data.remote.NetworkState
 import com.android.catalogmovie.data.remote.ProcessState
 import com.android.catalogmovie.data.remote.model.Genres
 import com.android.catalogmovie.data.remote.model.Movie
 import com.android.catalogmovie.data.remote.model.MovieDetailsResponse
+import com.android.catalogmovie.data.remote.model.ReviewsResponse
 import com.android.catalogmovie.data.remote.stateNetworkCall
 
 class MovieRepository : BaseRepository() {
@@ -47,6 +50,20 @@ class MovieRepository : BaseRepository() {
         } else {
             ProcessState.Failed(response as NetworkState.Failed)
         }
+    }
+
+    fun getReviews(movieId: Int): LiveData<PagingData<ReviewsResponse.Review>> {
+        return Pager(
+            config = PagingConfig(
+                pageSize = 25,
+                enablePlaceholders = false,
+                initialLoadSize = 2
+            ),
+            pagingSourceFactory = {
+                ReviewListDatasource(movieId, network)
+            }
+            , initialKey = 1
+        ).liveData
     }
 
 }

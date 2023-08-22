@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.android.catalogmovie.R
 import com.android.catalogmovie.data.remote.RequestState
 import com.android.catalogmovie.databinding.ActivityMovieDetailsBinding
+import com.google.android.material.tabs.TabLayoutMediator
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MovieDetailsActivity : AppCompatActivity() {
@@ -17,9 +18,10 @@ class MovieDetailsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        initView()
 
         val movieId = intent.getIntExtra(KEY_MOVIE_ID, 0)
+        initView(movieId = movieId)
+
         println("movieId: $movieId")
         vm.getMovieDetails(movieId) { state ->
             when (state) {
@@ -30,8 +32,19 @@ class MovieDetailsActivity : AppCompatActivity() {
         }
     }
 
-    private fun initView() {
+    private fun initView(movieId: Int) {
         setupToolbar()
+        setupViewPager(movieId)
+    }
+
+    private fun setupViewPager(movieId: Int) {
+        with(binding) {
+            val pagerAdapter = PagerAdapter(this@MovieDetailsActivity, movieId)
+            vpLanding.adapter = pagerAdapter
+            TabLayoutMediator(tlLanding, vpLanding) { tab, position ->
+                tab.text = tabTitles[position]
+            }.attach()
+        }
     }
 
     private fun setupToolbar() {
@@ -51,6 +64,7 @@ class MovieDetailsActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
+    private val tabTitles = arrayOf("Reviews", "Videos")
     companion object {
         const val KEY_MOVIE_ID = "KEY_MOVIE_ID"
     }

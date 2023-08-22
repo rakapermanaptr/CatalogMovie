@@ -3,6 +3,7 @@ package com.android.catalogmovie.data.remote
 import com.android.catalogmovie.data.remote.model.Genres
 import com.android.catalogmovie.data.remote.model.MovieDetailsResponse
 import com.android.catalogmovie.data.remote.model.MovieResponse
+import com.android.catalogmovie.data.remote.model.ReviewsResponse
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -24,4 +25,10 @@ interface ApiService {
     suspend fun getMovieDetails(
         @Path("movie_id") movieId: Int
     ): Response<MovieDetailsResponse>
+
+    @GET("movie/{movie_id}/reviews")
+    suspend fun getReviews(
+        @Path("movie_id") movieId: Int,
+        @Query("page") page: Int? = 1,
+    ): Response<ReviewsResponse>
 }
