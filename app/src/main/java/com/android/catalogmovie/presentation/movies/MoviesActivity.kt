@@ -8,6 +8,7 @@ import androidx.paging.PagingData
 import androidx.recyclerview.widget.GridLayoutManager
 import com.android.catalogmovie.data.remote.model.Movie
 import com.android.catalogmovie.databinding.ActivityMoviesBinding
+import com.android.catalogmovie.utils.NavigationUtils
 import com.android.catalogmovie.utils.gone
 import com.android.catalogmovie.utils.show
 import com.android.catalogmovie.utils.showToast
@@ -19,7 +20,7 @@ class MoviesActivity : AppCompatActivity() {
     private val vm: MoviesViewModel by viewModel()
 
     private val moviesAdapter = MovieListPagingAdapter {
-
+        NavigationUtils.navigateToMovieDetails(this, it.id)
     }
 
     private val binding by lazy { ActivityMoviesBinding.inflate(layoutInflater) }
