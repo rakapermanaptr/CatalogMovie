@@ -1,6 +1,7 @@
 package com.android.catalogmovie.presentation.movies.details
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
@@ -58,6 +59,13 @@ class MovieDetailsViewModel : ViewModel() {
                 }
             }
         }
+    }
+
+    private var _isReadMore = MutableLiveData<Boolean>()
+    val isReadMore get() = _isReadMore
+
+    fun setReadMore(more: Boolean) {
+        _isReadMore.value = more
     }
 
 }

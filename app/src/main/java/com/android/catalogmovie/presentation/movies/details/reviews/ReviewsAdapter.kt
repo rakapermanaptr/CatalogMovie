@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.android.catalogmovie.databinding.ItemReviewBinding
 import com.android.catalogmovie.domain.entities.Review
 
-class ReviewListPagingAdapter :
+class ReviewListPagingAdapter(private val onItemClicked: () -> Unit) :
     PagingDataAdapter<Review, ReviewListPagingAdapter.ViewHolder>(ReviewComparator) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -20,9 +20,18 @@ class ReviewListPagingAdapter :
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val review = getItem(position)!!
         holder.bind(review)
+        holder.itemView.setOnClickListener {
+            if (review.isReadMore) {
+                review.isReadMore = false
+                holder.binding.tvReview.maxLines = 3
+            } else {
+                review.isReadMore = true
+                holder.binding.tvReview.maxLines = review.review.length
+            }
+        }
     }
 
-    class ViewHolder(private val binding: ItemReviewBinding) :
+    class ViewHolder( val binding: ItemReviewBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(data: Review) {
             with(binding) {

@@ -25,7 +25,11 @@ class ReviewsFragment : Fragment() {
 
     private val vm: MovieDetailsViewModel by viewModel()
 
-    private val reviewsAdapter = ReviewListPagingAdapter()
+    private val reviewsAdapter = ReviewListPagingAdapter {
+        vm.isReadMore.observe(this, { isReadMore ->
+            vm.setReadMore(isReadMore)
+        })
+    }
 
     private val binding by lazy { FragmentReviewBinding.inflate(layoutInflater) }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
