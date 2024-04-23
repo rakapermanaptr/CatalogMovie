@@ -3,13 +3,13 @@ package com.android.catalogmovie.presentation.genres
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.GridLayoutManager
-import com.android.catalogmovie.data.remote.RequestState
-import com.android.catalogmovie.domain.entities.Genre
 import com.android.catalogmovie.databinding.ActivityGenresBinding
 import com.android.catalogmovie.utils.NavigationUtils
-import com.android.catalogmovie.utils.gone
-import com.android.catalogmovie.utils.handleErrorState
-import com.android.catalogmovie.utils.show
+import com.paem.core.data.remote.RequestState
+import com.paem.core.entities.Genre
+import com.paem.core.utils.gone
+import com.paem.core.utils.handleErrorState
+import com.paem.core.utils.show
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class GenresActivity : AppCompatActivity() {

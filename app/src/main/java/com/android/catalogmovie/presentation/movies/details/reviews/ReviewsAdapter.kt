@@ -6,9 +6,9 @@ import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.android.catalogmovie.databinding.ItemReviewBinding
-import com.android.catalogmovie.domain.entities.Review
+import com.paem.core.entities.Review
 
-class ReviewListPagingAdapter(private val onItemClicked: () -> Unit) :
+class ReviewListPagingAdapter :
     PagingDataAdapter<Review, ReviewListPagingAdapter.ViewHolder>(ReviewComparator) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

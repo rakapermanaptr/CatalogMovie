@@ -7,11 +7,11 @@ import androidx.paging.LoadState
 import androidx.paging.PagingData
 import androidx.recyclerview.widget.GridLayoutManager
 import com.android.catalogmovie.databinding.ActivityMoviesBinding
-import com.android.catalogmovie.domain.entities.Movie
 import com.android.catalogmovie.utils.NavigationUtils
-import com.android.catalogmovie.utils.gone
-import com.android.catalogmovie.utils.show
-import com.android.catalogmovie.utils.showToast
+import com.paem.core.entities.Movie
+import com.paem.core.utils.gone
+import com.paem.core.utils.show
+import com.paem.core.utils.showToast
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 

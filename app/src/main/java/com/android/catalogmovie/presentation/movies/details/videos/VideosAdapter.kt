@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.android.catalogmovie.databinding.ItemVideoBinding
-import com.android.catalogmovie.domain.entities.Video
+import com.paem.core.entities.Video
 
 class VideosAdapter : RecyclerView.Adapter<VideosAdapter.ViewHolder>() {
 

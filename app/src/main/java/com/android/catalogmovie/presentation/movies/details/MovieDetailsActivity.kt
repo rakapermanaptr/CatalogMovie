@@ -4,14 +4,14 @@ import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import com.android.catalogmovie.R
-import com.android.catalogmovie.data.remote.RequestState
 import com.android.catalogmovie.databinding.ActivityMovieDetailsBinding
-import com.android.catalogmovie.domain.entities.MovieDetail
-import com.android.catalogmovie.utils.gone
-import com.android.catalogmovie.utils.handleErrorState
-import com.android.catalogmovie.utils.show
+import com.paem.core.utils.gone
+import com.paem.core.utils.handleErrorState
+import com.paem.core.utils.show
 import com.bumptech.glide.Glide
 import com.google.android.material.tabs.TabLayoutMediator
+import com.paem.core.data.remote.RequestState
+import com.paem.core.entities.MovieDetail
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MovieDetailsActivity : AppCompatActivity() {

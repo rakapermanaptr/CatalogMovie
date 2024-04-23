@@ -6,14 +6,13 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
-import com.android.catalogmovie.data.MovieRepository
-import com.android.catalogmovie.data.remote.ProcessState
-import com.android.catalogmovie.data.remote.RequestState
-import com.android.catalogmovie.domain.entities.MovieDetail
-import com.android.catalogmovie.domain.entities.Review
-import com.android.catalogmovie.domain.entities.Video
-import com.android.catalogmovie.utils.toMovieDetail
-import com.android.catalogmovie.utils.toVideo
+import com.paem.core.data.MovieRepository
+import com.paem.core.data.remote.RequestState
+import com.paem.core.entities.MovieDetail
+import com.paem.core.entities.Review
+import com.paem.core.entities.Video
+import com.paem.core.utils.toMovieDetail
+import com.paem.core.utils.toVideo
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -29,9 +28,9 @@ class MovieDetailsViewModel : ViewModel() {
         viewModelScope.launch(Dispatchers.IO) {
             val process = repo.getMovieDetails(movieId)
             launch(Dispatchers.Main) {
-                if (process is ProcessState.Success) {
+                if (process is com.paem.core.data.remote.ProcessState.Success) {
                     callback(RequestState.Success(process.result.toMovieDetail()))
-                } else if (process is ProcessState.Failed) {
+                } else if (process is com.paem.core.data.remote.ProcessState.Failed) {
                     callback(RequestState.Failed(process.error))
                 }
             }
@@ -50,22 +49,15 @@ class MovieDetailsViewModel : ViewModel() {
         viewModelScope.launch(Dispatchers.IO) {
             val process = repo.getVideos(movieId)
             launch(Dispatchers.Main) {
-                if (process is ProcessState.Success) {
+                if (process is com.paem.core.data.remote.ProcessState.Success) {
                     val videos = process.result.results
                     if (videos != null) callback(RequestState.Success(videos.map { it.toVideo() }))
                     else callback(RequestState.Success(emptyList()))
-                } else if (process is ProcessState.Failed) {
+                } else if (process is com.paem.core.data.remote.ProcessState.Failed) {
                     callback(RequestState.Failed(process.error))
                 }
             }
         }
-    }
-
-    private var _isReadMore = MutableLiveData<Boolean>()
-    val isReadMore get() = _isReadMore
-
-    fun setReadMore(more: Boolean) {
-        _isReadMore.value = more
     }
 
 }

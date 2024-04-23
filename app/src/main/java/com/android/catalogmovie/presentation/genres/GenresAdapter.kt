@@ -3,8 +3,8 @@ package com.android.catalogmovie.presentation.genres
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.android.catalogmovie.domain.entities.Genre
 import com.android.catalogmovie.databinding.ItemGenreBinding
+import com.paem.core.entities.Genre
 
 class GenresAdapter(private val onItemClick: (item: Genre) -> Unit) :
     RecyclerView.Adapter<GenresAdapter.ViewHolder>() {

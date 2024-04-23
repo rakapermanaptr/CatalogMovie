@@ -7,14 +7,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.android.catalogmovie.data.remote.RequestState
 import com.android.catalogmovie.databinding.FragmentVideosBinding
-import com.android.catalogmovie.domain.entities.Video
 import com.android.catalogmovie.presentation.movies.details.MovieDetailsViewModel
 import com.android.catalogmovie.presentation.movies.details.PagerAdapter
-import com.android.catalogmovie.utils.gone
-import com.android.catalogmovie.utils.handleErrorState
-import com.android.catalogmovie.utils.show
+import com.paem.core.data.remote.RequestState
+import com.paem.core.entities.Video
+import com.paem.core.utils.gone
+import com.paem.core.utils.handleErrorState
+import com.paem.core.utils.show
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class VideosFragment : Fragment() {

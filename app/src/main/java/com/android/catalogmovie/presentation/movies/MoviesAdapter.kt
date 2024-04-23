@@ -6,8 +6,8 @@ import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.android.catalogmovie.databinding.ItemMovieBinding
-import com.android.catalogmovie.domain.entities.Movie
 import com.bumptech.glide.Glide
+import com.paem.core.entities.Movie
 
 class MovieListPagingAdapter(private val onItemClick: (item: Movie) -> Unit) :
     PagingDataAdapter<Movie, MovieListPagingAdapter.ViewHolder>(MovieComparator) {

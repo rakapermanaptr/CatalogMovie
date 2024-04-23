@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="something_went_wrong">Sorry something went wrong...</string>
+    <string name="error_timeout">Slow internet connection. Please check your internet connection.</string>
+    <string name="no_internet_connection">No internet connection</string>
+    <string name="internal_server_error">Internal error: Something went wrong, contact TMDB.</string>
+</resources>

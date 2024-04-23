@@ -12,12 +12,12 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.android.catalogmovie.databinding.FragmentReviewBinding
-import com.android.catalogmovie.domain.entities.Review
 import com.android.catalogmovie.presentation.movies.details.MovieDetailsViewModel
 import com.android.catalogmovie.presentation.movies.details.PagerAdapter
-import com.android.catalogmovie.utils.gone
-import com.android.catalogmovie.utils.show
-import com.android.catalogmovie.utils.showToast
+import com.paem.core.entities.Review
+import com.paem.core.utils.gone
+import com.paem.core.utils.show
+import com.paem.core.utils.showToast
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -25,11 +25,7 @@ class ReviewsFragment : Fragment() {
 
     private val vm: MovieDetailsViewModel by viewModel()
 
-    private val reviewsAdapter = ReviewListPagingAdapter {
-        vm.isReadMore.observe(this, { isReadMore ->
-            vm.setReadMore(isReadMore)
-        })
-    }
+    private val reviewsAdapter = ReviewListPagingAdapter()
 
     private val binding by lazy { FragmentReviewBinding.inflate(layoutInflater) }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
