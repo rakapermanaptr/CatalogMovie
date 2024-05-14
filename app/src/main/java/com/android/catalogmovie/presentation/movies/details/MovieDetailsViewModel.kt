@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.paem.core.data.MovieRepository
+import com.paem.core.data.remote.ProcessState
 import com.paem.core.data.remote.RequestState
 import com.paem.core.entities.MovieDetail
 import com.paem.core.entities.Review
@@ -28,9 +29,9 @@ class MovieDetailsViewModel : ViewModel() {
         viewModelScope.launch(Dispatchers.IO) {
             val process = repo.getMovieDetails(movieId)
             launch(Dispatchers.Main) {
-                if (process is com.paem.core.data.remote.ProcessState.Success) {
+                if (process is ProcessState.Success) {
                     callback(RequestState.Success(process.result.toMovieDetail()))
-                } else if (process is com.paem.core.data.remote.ProcessState.Failed) {
+                } else if (process is ProcessState.Failed) {
                     callback(RequestState.Failed(process.error))
                 }
             }
@@ -49,11 +50,11 @@ class MovieDetailsViewModel : ViewModel() {
         viewModelScope.launch(Dispatchers.IO) {
             val process = repo.getVideos(movieId)
             launch(Dispatchers.Main) {
-                if (process is com.paem.core.data.remote.ProcessState.Success) {
+                if (process is ProcessState.Success) {
                     val videos = process.result.results
                     if (videos != null) callback(RequestState.Success(videos.map { it.toVideo() }))
                     else callback(RequestState.Success(emptyList()))
-                } else if (process is com.paem.core.data.remote.ProcessState.Failed) {
+                } else if (process is ProcessState.Failed) {
                     callback(RequestState.Failed(process.error))
                 }
             }
