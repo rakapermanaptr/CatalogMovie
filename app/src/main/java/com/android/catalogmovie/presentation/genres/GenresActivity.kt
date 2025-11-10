@@ -2,6 +2,9 @@ package com.android.catalogmovie.presentation.genres
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import com.android.catalogmovie.databinding.ActivityGenresBinding
 import com.android.catalogmovie.utils.NavigationUtils
