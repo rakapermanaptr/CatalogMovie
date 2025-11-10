@@ -2,10 +2,12 @@ package com.android.catalogmovie.presentation.genres
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.activity.enableEdgeToEdge
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.GridLayoutManager
+import com.android.catalogmovie.R
 import com.android.catalogmovie.databinding.ActivityGenresBinding
 import com.android.catalogmovie.utils.NavigationUtils
 import com.paem.core.data.remote.RequestState
@@ -26,6 +28,7 @@ class GenresActivity : AppCompatActivity() {
     private val binding by lazy { ActivityGenresBinding.inflate(layoutInflater) }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        theme.applyStyle(R.style.OptOutEdgeToEdgeEnforcement,false)
         setContentView(binding.root)
 
         observeViewModel()

@@ -21,6 +21,7 @@ class MovieDetailsActivity : AppCompatActivity() {
     private val binding by lazy { ActivityMovieDetailsBinding.inflate(layoutInflater) }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        theme.applyStyle(R.style.OptOutEdgeToEdgeEnforcement,false)
         setContentView(binding.root)
         with(binding) {
             val movieId = intent.getIntExtra(KEY_MOVIE_ID, 0)

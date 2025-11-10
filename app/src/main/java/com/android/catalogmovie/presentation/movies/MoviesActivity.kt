@@ -6,6 +6,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.paging.LoadState
 import androidx.paging.PagingData
 import androidx.recyclerview.widget.GridLayoutManager
+import com.android.catalogmovie.R
 import com.android.catalogmovie.databinding.ActivityMoviesBinding
 import com.android.catalogmovie.utils.NavigationUtils
 import com.paem.core.entities.Movie
@@ -26,6 +27,8 @@ class MoviesActivity : AppCompatActivity() {
     private val binding by lazy { ActivityMoviesBinding.inflate(layoutInflater) }
     override fun onCreate(savedInstanceState: Bundle?): Unit = with(binding) {
         super.onCreate(savedInstanceState)
+        theme.applyStyle(R.style.OptOutEdgeToEdgeEnforcement,false)
+
         setContentView(binding.root)
 
         val genreId = intent.getIntExtra(KEY_GENRE_ID, 0)
